@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Recipe from './Recipe';
 import './App.css';
+import logo from './images/find-your-recipe-logo.png';
 
 const App = () => {
 
@@ -12,15 +13,16 @@ const App = () => {
   const [query, setQuery] = useState('Pasta');
 
   useEffect(() => {
+    const getRecipes = async () => {
+      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
+      const data = await response.json();
+      setRecipes(data.hits);
+      console.log(data.hits);
+    };
     getRecipes();
   }, [query]);
 
-  const getRecipes = async () => {
-    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`);
-    const data = await response.json();
-    setRecipes(data.hits);
-    console.log(data.hits);
-  };
+
 
   const updateSearch = e => {
     setSearch(e.target.value);
@@ -35,8 +37,12 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="container">
+        <img className="logo" src={logo} alt="Find Your Recipe Logo" />
+      </div>
       <form onSubmit={getSearch} className="search-form">
         <input
+          placeholder="Search some recet..."
           className="search-bar"
           type="text"
           value={search}

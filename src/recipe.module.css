@@ -5,10 +5,10 @@
     margin: 20px;
     display: flex;
     flex-direction: column;
-    justify-content:space-around;
+    justify-content:center;
     background: white;
     align-items: center;
-    min-width: 40%;
+    min-width: 50%;
 }
 
 .image{
@@ -24,3 +24,12 @@
 .ingredients{
     margin: 5px;
 }
+
+
+@media (max-width: 768px){
+    .image{
+
+        width: 250px;
+        height: 250px;
+    }
+  }
